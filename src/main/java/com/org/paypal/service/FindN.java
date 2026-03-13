@@ -4,33 +4,25 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FindN {
-    public static String find(String n) {
-        String str = "1";
-        if ("1".equals(n)) {
-            return str;
+    public static String find(int n) {
+        if (n == 1) {
+            return "1";
         }
-        for (int i = 1; i < Integer.parseInt(n); i++) {
-            str = get(str);
-        }
-        return str;
+        return get(find(n - 1));
     }
 
     private static String get(String str) {
-        int consecutive = 1;
-        String result = "";
-        for (int i = 0; i < (str.length()-1); i++) {
-            char charAtPos = str.charAt(i);
-            char charAtNextPos = str.charAt(i+1);
-            if (charAtPos == charAtNextPos) {
-                consecutive += 1;
-            } else if (str.length() == charAtNextPos){
-                result += consecutive + String.valueOf(charAtPos);
-            } else {
-                result += consecutive + String.valueOf(charAtPos);
-                consecutive = 0;
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+        while (i < str.length()) {
+            int count = 1;
+            while (i + 1 < str.length() && str.charAt(i) == str.charAt(i + 1)) {
+                count++;
+                i++;
             }
+            result.append(count).append(str.charAt(i));
+            i++;
         }
-
-        return result;
+        return result.toString();
     }
 }
