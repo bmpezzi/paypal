@@ -1,8 +1,11 @@
 package com.org.paypal.service;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@NoArgsConstructor(access = AccessLevel.NONE)
 public class FindN {
     public static String find(int n) {
         if (n == 1) {
